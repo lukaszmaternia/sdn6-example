@@ -10,19 +10,10 @@ import org.springframework.data.neo4j.core.schema.RelationshipProperties;
 import org.springframework.data.neo4j.core.schema.TargetNode;
 
 @RelationshipProperties
-public class ParentToChild {
+public class ParentToChild extends Relationship<Person> {
 
-    @Id
-    @GeneratedValue
-    @JsonIgnore
-    private Long id;
-
-    @TargetNode
-    @JsonUnwrapped
-    @JsonIgnoreProperties({ "id" })
-    private final Person person;
 
     public ParentToChild(Person person) {
-        this.person = person;
+        super(person);
     }
 }
