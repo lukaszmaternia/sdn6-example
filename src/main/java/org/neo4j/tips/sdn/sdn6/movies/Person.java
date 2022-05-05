@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -26,14 +27,18 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 @Getter
 @Setter
-@ToString(of = {}, callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Node
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-@EqualsAndHashCode(callSuper = true, of = {})
-public final class Person extends Entity<PersonData> {
+@ToString(of = {"id"})
+@EqualsAndHashCode(callSuper = false, of = {"id"})
+@Slf4j
+@Node
+public final class Person {
 
+	@Id
+	@GeneratedValue
+	protected UUID id;
 
 	private String name;
 
@@ -102,3 +107,5 @@ public final class Person extends Entity<PersonData> {
 		return childRels;
 	}
 }
+
+
