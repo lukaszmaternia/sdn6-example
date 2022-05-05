@@ -13,18 +13,6 @@ public interface PeopleRepository extends Neo4jRepository<Person, UUID> {
 
 	@Query(
 			"MATCH (person:Person {name: $name}) " +
-					"OPTIONAL MATCH (person)-[:DIRECTED]->(d:Movie) "+
-					"OPTIONAL MATCH (person)<-[r:ACTED_IN]->(a:Movie) "+
-					"OPTIONAL MATCH (person)-->(movies)<-[relatedRole:ACTED_IN]-(relatedPerson)	"	+
-					"RETURN DISTINCT person, "+
-					"collect(DISTINCT d) AS directed, "+
-					"collect(DISTINCT a) AS actedIn, "+
-					"collect(DISTINCT relatedPerson) AS related"
-	)
-	Optional<PersonDetails> getDetailsByName(String name);
-
-	@Query(
-			"MATCH (person:Person {name: $name}) " +
 					"OPTIONAL MATCH (person)<-[parentRel:PARENT_TO_CHILD]-(parent:Person) " +
 					"RETURN person.id as id, " +
 					"person, "+
