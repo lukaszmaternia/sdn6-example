@@ -19,13 +19,11 @@ public class PeopleRepositoryIntegrationTest extends ApplicationAbstractTest {
     @Test
     public void shouldFindPeople() {
 
+        // when
         final var result = peopleRepository.getPersonWithParents("Angela Scope");
 
         // then
         assertThat(result).isPresent();
-//        final Person resultPerson = result.get();
-//        assertThat(resultPerson.getParentRels()).hasSize(1);
-//        assertThat(resultPerson.getParents()).hasSize(1);
-//        assertThat(resultPerson.getParents().get(0).getName()).isEqualTo("Paul Blythe");
+        assertThat(result.get().getParents()).isNotEmpty();
     }
 }
