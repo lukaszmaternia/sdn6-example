@@ -24,6 +24,20 @@ public class PeopleRepositoryIntegrationTest extends ApplicationAbstractTest {
 
         // then
         assertThat(result).isPresent();
-        assertThat(result.get().getParents()).isNotEmpty();
+
+//        assertThat(result.get().getName()).isNotNull();
+//        assertThat(result.get().getPerson()).isNotNull();
+
+        // -- PARENTS
+        assertThat(result.get().getParentRels()).isNotEmpty();
+        assertThat(result.get().getParentRels().get(0).getPerson().getName()).isEqualTo("Paul Blythe");
+
+//        assertThat(result.get().getParents()).isNotEmpty();
+
+        // -- CHILDREN
+//        assertThat(result.get().getPerson().getChildRels()).isNotEmpty();
+//        assertThat(result.get().getPerson().getChildRels().get(0).getPerson().getName()).isEqualTo("Jessica Thompson");
+        assertThat(result.get().getChildRels()).isNotEmpty();
+        assertThat(result.get().getChildRels().get(0).getPerson().getName()).isEqualTo("Jessica Thompson");
     }
 }
